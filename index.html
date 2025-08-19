@@ -1,0 +1,33 @@
+<?php
+include("db.php");
+$result = $conn->query("SELECT * FROM products");
+?>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MarketX</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <marquee>Welcome to MarketX Shopping!</marquee>
+
+  <header>
+    <a href="index.php">Home</a>
+    <a href="login_customer.php">Customer Login</a>
+    <a href="login_admin.php">Admin Login</a>
+  </header>
+
+  <h2>All Products</h2>
+  <div class="product-list">
+    <?php while($row = $result->fetch_assoc()): ?>
+      <div class="product-card">
+        <img src="uploads/<?php echo $row['image']; ?>" width="100">
+        <h3><?php echo $row['name']; ?></h3>
+        <p>Category: <?php echo $row['category']; ?></p>
+        <p>Price: ₹<?php echo $row['total_price']; ?></p>
+        <button>Order Now</button>
+      </div>
+    <?php endwhile; ?>
+  </div>
+</body>
+</html>
